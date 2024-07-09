@@ -36,7 +36,7 @@ class PatientRecordsIntegrationTest < Minitest::Test
         {
           'patient_id' => 2,
           'allergies' => ["work", "conformity", "paying taxes"],
-          'num_medical_visits' => nil,
+          'num_medical_visits' => 1,
           'province' => "QC",
         }
       assert_equal expectation, PatientRecords.new.consolidate_from_services(patient)

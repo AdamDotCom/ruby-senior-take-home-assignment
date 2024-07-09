@@ -29,7 +29,13 @@ module Vandelay
         case patient.records_vendor
         when 'one'
           response = VendorOneClient.new(@config).patients(patient.vendor_id)[0]
-          result.merge!(response.slice('province', 'allergies'))
+          result.merge!(
+            {
+              'allergies' => response['allergies'],
+              'num_medical_visits' => response['recent_medical_visits'],
+              'province' => response['province']
+            }
+          )
         when 'two'
           response = VendorTwoClient.new(@config).patients(patient.vendor_id)[0]
           result.merge!(
