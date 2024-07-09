@@ -1,6 +1,6 @@
 require_relative '../../../../lib/vandelay/integrations'
 
-class VCRTest < Test::Unit::TestCase
+class VendorTwoTest < Minitest::Test
   include Vandelay::Integrations
 
   def test_patients_george
