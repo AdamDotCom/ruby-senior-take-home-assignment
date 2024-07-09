@@ -21,6 +21,12 @@ module Vandelay
         Vandelay::Models::Patient.new(**result)
       end
 
+      def self.find_by_id!(patient_id)
+        result = Vandelay::Models::Patient.with_id(patient_id)
+        return raise Sinatra::NotFound.new("Record Not Found!") if result.nil?
+
+        result
+      end
     end
   end
 end
