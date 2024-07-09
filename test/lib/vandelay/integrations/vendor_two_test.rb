@@ -3,11 +3,11 @@ require_relative '../../../../lib/vandelay/integrations'
 class VCRTest < Test::Unit::TestCase
   include Vandelay::Integrations
 
-  def test_records_george
+  def test_patients_george
     VCR.use_cassette("vendor_two") do
       config = { 'integrations' => { 'vendors' => { 'two' => { 'api_base_url' => 'mock_api_two:80' }}}}
 
-      george = VendorTwoClient.new(config).records(16)[0]
+      george = VendorTwoClient.new(config).patients(16)[0]
       expectation = {
         "allergies_list" => ["hair", "mean people", "paying the bill"],
         "birthdate" => "1984-09-07",

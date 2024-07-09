@@ -18,7 +18,7 @@ module Vandelay
         self.class.headers['Authorization'] = "Bearer #{response.dig('auth_token')}"
       end
 
-      def records(id = nil)
+      def patients(id = nil)
         self.class.get("/records/", query: { id: id }.compact).parsed_response
       end
     end
