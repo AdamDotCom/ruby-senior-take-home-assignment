@@ -3,8 +3,9 @@ module Vandelay
     class PatientRecords
       include Vandelay::Integrations
 
-      def initialize(cache = Vandelay.cache)
+      def initialize(cache = Vandelay.cache, config = Vandelay.config)
         @cache = cache
+        @config = config
       end
 
       def retrieve_record_for_patient(patient)
@@ -27,10 +28,10 @@ module Vandelay
 
         case patient.records_vendor
         when 'one'
-          response = VendorOneClient.new(Vandelay.config).patients(patient.vendor_id)[0]
+          response = VendorOneClient.new(@config).patients(patient.vendor_id)[0]
           result.merge!(response.slice('province', 'allergies'))
         when 'two'
-          response = VendorTwoClient.new(Vandelay.config).patients(patient.vendor_id)[0]
+          response = VendorTwoClient.new(@config).patients(patient.vendor_id)[0]
           result.merge!(
             {
               'allergies' => response['allergies_list'],
