@@ -1,0 +1,114 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://mock_api_two/auth_tokens/1
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Powered-By:
+      - Express
+      Vary:
+      - Origin, Accept-Encoding
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Cache-Control:
+      - no-cache
+      Pragma:
+      - no-cache
+      Expires:
+      - "-1"
+      X-Content-Type-Options:
+      - nosniff
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '56'
+      Etag:
+      - W/"38-Av5sqHMfmZXa6nHzH0AnZzuw8Ao"
+      Date:
+      - Tue, 09 Jul 2024 02:41:03 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "id": "1",
+          "auth_token": "349rijed934r8ij123$=="
+        }
+  recorded_at: Tue, 09 Jul 2024 02:41:03 GMT
+- request:
+    method: get
+    uri: http://mock_api_two/records/?id=16
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Powered-By:
+      - Express
+      Vary:
+      - Origin, Accept-Encoding
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Cache-Control:
+      - no-cache
+      Pragma:
+      - no-cache
+      Expires:
+      - "-1"
+      X-Content-Type-Options:
+      - nosniff
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '262'
+      Etag:
+      - W/"106-jLa1TqZpsfR7+yvQW2t83HwpM1M"
+      Date:
+      - Tue, 09 Jul 2024 02:41:03 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: |-
+        [
+          {
+            "id": "16",
+            "name": "George Costanza",
+            "birthdate": "1984-09-07",
+            "province_code": "ON",
+            "clinic_id": "7",
+            "allergies_list": [
+              "hair",
+              "mean people",
+              "paying the bill"
+            ],
+            "medical_visits_recently": 17
+          }
+        ]
+  recorded_at: Tue, 09 Jul 2024 02:41:03 GMT
+recorded_with: VCR 6.2.0

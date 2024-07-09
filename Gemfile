@@ -8,3 +8,9 @@ gem 'sinatra-contrib'
 gem 'puma'
 gem 'rackup'
 gem 'irb'
+gem 'httparty'
+
+group :test do
+  gem 'vcr'
+  gem 'webmock'
+end

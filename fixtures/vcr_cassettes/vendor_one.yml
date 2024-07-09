@@ -1,0 +1,113 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://mock_api_one/auth/1
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Powered-By:
+      - Express
+      Vary:
+      - Origin, Accept-Encoding
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Cache-Control:
+      - no-cache
+      Pragma:
+      - no-cache
+      Expires:
+      - "-1"
+      X-Content-Type-Options:
+      - nosniff
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '52'
+      Etag:
+      - W/"34-6T4vicdOBuaVCRtq5G6mY6IXYDk"
+      Date:
+      - Tue, 09 Jul 2024 02:31:32 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "id": "1",
+          "token": "129e8ry23uhj23948rhu23"
+        }
+  recorded_at: Tue, 09 Jul 2024 02:31:32 GMT
+- request:
+    method: get
+    uri: http://mock_api_one/patients/?id=743
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Powered-By:
+      - Express
+      Vary:
+      - Origin, Accept-Encoding
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Cache-Control:
+      - no-cache
+      Pragma:
+      - no-cache
+      Expires:
+      - "-1"
+      X-Content-Type-Options:
+      - nosniff
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '220'
+      Etag:
+      - W/"dc-sBHX+DTATIMwRr1AsCTlVSjmQos"
+      Date:
+      - Tue, 09 Jul 2024 02:31:32 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: |-
+        [
+          {
+            "id": "743",
+            "full_name": "Cosmo Kramer",
+            "dob": "1987-03-18",
+            "province": "QC",
+            "allergies": [
+              "work",
+              "conformity",
+              "paying taxes"
+            ],
+            "recent_medical_visits": 1
+          }
+        ]
+  recorded_at: Tue, 09 Jul 2024 02:31:32 GMT
+recorded_with: VCR 6.2.0
