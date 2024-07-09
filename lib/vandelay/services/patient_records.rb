@@ -3,7 +3,21 @@ module Vandelay
     class PatientRecords
       include Vandelay::Integrations
 
+      def initialize(cache = Vandelay.cache)
+        @cache = cache
+      end
+
       def retrieve_record_for_patient(patient)
+        return JSON.parse(@cache.get(patient.id)) if @cache.exists?(patient.id)
+
+        result = consolidate_from_services(patient)
+
+        @cache.set(patient.id, result.to_json)
+        @cache.expire(patient.id, 600)
+        result
+      end
+
+      def consolidate_from_services(patient)
         result = {
           'patient_id' => patient.id,
           'allergies' => nil,

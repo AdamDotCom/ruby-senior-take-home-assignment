@@ -6,3 +6,5 @@ integrations:
       api_base_url: mock_api_one:80
     two:
       api_base_url: mock_api_two:80
+cache:
+  redis: redis://redis

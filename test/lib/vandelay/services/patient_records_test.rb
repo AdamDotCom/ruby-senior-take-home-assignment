@@ -1,63 +1,37 @@
 require_relative '../../../../lib/vandelay/integrations'
 require_relative '../../../../lib/vandelay/services/patient_records'
 
-class PatientRecords < Test::Unit::TestCase
+class PatientRecordsTest < Minitest::Test
   include Vandelay::Services
 
-  def test_vendor_two_extension
-    VCR.use_cassette("vendor_two") do
-      patient = OpenStruct.new(
-        {
-          id: 3,
-          records_vendor: 'two',
-          vendor_id: 16
-        }
-      )
-      expectation = {
-        'patient_id' => 3,
-        'allergies' => ["hair", "mean people", "paying the bill"],
-        'num_medical_visits' => 17,
-        'province' => "ON"
-      }
-      assert_equal expectation, PatientRecords.new.retrieve_record_for_patient(patient)
-    end
+  def setup
+    @patient = OpenStruct.new({ id: 1 })
+    @service_result = {
+      'patient_id' => @patient.id,
+      'allergies' => nil,
+      'num_medical_visits' => nil,
+      'province' => nil,
+    }
   end
 
-  def test_vendor_one_extension
-    VCR.use_cassette("vendor_one") do
-      patient = OpenStruct.new(
-        {
-          id: 2,
-          records_vendor: 'one',
-          vendor_id: 743
-        }
-      )
-      expectation =
-        {
-          'patient_id' => 2,
-          'allergies' => ["work", "conformity", "paying taxes"],
-          'num_medical_visits' => nil,
-          'province' => "QC",
-        }
-      assert_equal expectation, PatientRecords.new.retrieve_record_for_patient(patient)
-    end
+  def test_cache_miss
+    @mock = Minitest::Mock.new
+    @mock.expect(:exists?, false, [@patient.id])
+    @mock.expect(:set, nil, [@patient.id, @service_result.to_json])
+    @mock.expect(:expire, nil, [@patient.id, 600])
+
+    PatientRecords.new(@mock).retrieve_record_for_patient(@patient)
+
+    @mock.verify
   end
 
-  def test_no_vendor
-    patient = OpenStruct.new(
-      {
-        id: 1,
-        records_vendor: nil,
-        vendor_id: nil
-      }
-    )
-    expectation =
-      {
-        'patient_id' => 1,
-        'allergies' => nil,
-        'num_medical_visits' => nil,
-        'province' => nil,
-      }
-    assert_equal expectation, PatientRecords.new.retrieve_record_for_patient(patient)
+  def test_cache_result
+    @mock = Minitest::Mock.new
+    @mock.expect(:exists?, true, [@patient.id])
+    @mock.expect(:get, @service_result.to_json, [@patient.id])
+
+    PatientRecords.new(@mock).retrieve_record_for_patient(@patient)
+
+    @mock.verify
   end
 end

@@ -1,4 +1,5 @@
 require 'yaml'
+require 'redis'
 
 module Vandelay
   def self.service_name
@@ -23,5 +24,9 @@ module Vandelay
 
   def self.config_path
     @config_path ||= File.expand_path("../#{self.config_file_for_env}", File.dirname(__FILE__))
+  end
+
+  def self.cache
+    @cache ||= Redis.new(url: self.config.dig('cache', 'redis'))
   end
 end
